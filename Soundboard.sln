@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soundboard", "Soundboard\Soundboard.csproj", "{87244B31-DF2C-4558-875B-D85FC35B4BCB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87244B31-DF2C-4558-875B-D85FC35B4BCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87244B31-DF2C-4558-875B-D85FC35B4BCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87244B31-DF2C-4558-875B-D85FC35B4BCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87244B31-DF2C-4558-875B-D85FC35B4BCB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
