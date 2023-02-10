@@ -3,10 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Soundboard"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" MinHeight="450" MinWidth="800" Background="#222831" Loaded="MainWindow_OnLoaded">
     <Grid>
-
+        <Grid x:Name="InitialGrid">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}" IsIndeterminate="True"
+                             Height="125" Width="125" />
+                <Label FontSize="15" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,8,0,0">Initializing...</Label>
+            </StackPanel>
+        </Grid>
+        <Frame x:Name="mainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

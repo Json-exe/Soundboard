@@ -5,6 +5,31 @@
         <TargetFramework>net7.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>DevCert.snk</AssemblyOriginatorKeyFile>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <FileVersion>1.0.0.0</FileVersion>
     </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MaterialDesignThemes" Version="4.8.0-ci161" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+        <PackageReference Include="NLog" Version="5.1.1" />
+        <PackageReference Include="NLog.Schema" Version="5.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Components\Navigation.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="NLog.config">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
 
 </Project>

@@ -1,0 +1,59 @@
+﻿<Page x:Class="Soundboard.Components.Navigation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d"
+      d:DesignHeight="400" 
+      d:DesignWidth="800"
+      Title="MainPage" Height="auto" Width="auto" Background="#222831">
+
+    <Grid>
+        <Grid VerticalAlignment="Top" Name="NavBar">
+            <materialDesign:Card Padding="8" Height="auto" HorizontalContentAlignment="Left">
+                <WrapPanel>
+                    <Button
+                        Click="Button_AddSoundClick"
+                        Margin="8"
+                        Width="35"
+                        Height="35"
+                        ToolTip="Add a new sound"
+                        materialDesign:HintAssist.Hint="Add Sound"
+                        Style="{StaticResource MaterialDesignIconButton}">
+                        <materialDesign:PackIcon
+                            Width="35"
+                            Height="35"
+                            Kind="Plus" />
+                    </Button>
+                    <Button
+                        Margin="8"
+                        Width="35"
+                        Height="35"
+                        ToolTip="Shows all sounds"
+                        Click="Button_SoundsClick"
+                        materialDesign:HintAssist.Hint="Sounds"
+                        Style="{StaticResource MaterialDesignIconButton}">
+                        <materialDesign:PackIcon
+                            Width="35"
+                            Height="35"
+                            Kind="Music" />
+                    </Button>
+                    <Button
+                        Margin="8"
+                        Width="35"
+                        Height="35"
+                        ToolTip="Shows the settings"
+                        materialDesign:HintAssist.Hint="Settings"
+                        Style="{StaticResource MaterialDesignIconButton}">
+                        <materialDesign:PackIcon
+                            Width="35"
+                            Height="35"
+                            Kind="Settings" />
+                    </Button>
+                </WrapPanel>
+            </materialDesign:Card>
+        </Grid>
+        <Frame x:Name="contentFrame" NavigationUIVisibility="Hidden" Margin="0,65,0,0" Background="#222831"/>
+    </Grid>
+</Page>
