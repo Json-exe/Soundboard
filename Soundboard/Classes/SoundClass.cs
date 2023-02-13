@@ -24,6 +24,16 @@ public class SoundClass
     public bool Loop { get; set; }
     public Key ShortcutKey { get; set; } = Key.None;
 
+    public void SetVolume(double newVolume)
+    {
+        // Change the volume of the sound
+        if (_waveOut is { PlaybackState: PlaybackState.Playing })
+        {
+            _waveOut.Volume = (float)Volume / 100;
+        }
+        Volume = newVolume;
+    }
+
     public void Play()
     {
         var serviceProvider = (IServiceProvider)Application.Current.Resources["ServiceProvider"];
