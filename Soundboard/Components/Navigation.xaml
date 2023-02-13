@@ -45,11 +45,25 @@
                         Height="35"
                         ToolTip="Shows the settings"
                         materialDesign:HintAssist.Hint="Settings"
+                        Click="SettingsButton_Click"
                         Style="{StaticResource MaterialDesignIconButton}">
                         <materialDesign:PackIcon
                             Width="35"
                             Height="35"
                             Kind="Settings" />
+                    </Button>
+                    <Button
+                        Margin="8"
+                        Width="35"
+                        Height="35"
+                        Click="StopButton_Click"
+                        ToolTip="Stops all sounds"
+                        materialDesign:HintAssist.Hint="Settings"
+                        Style="{StaticResource MaterialDesignIconButton}">
+                        <materialDesign:PackIcon
+                            Width="35"
+                            Height="35"
+                            Kind="Stop" />
                     </Button>
                 </WrapPanel>
             </materialDesign:Card>

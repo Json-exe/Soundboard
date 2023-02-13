@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Soundboard.Components.SoundPadControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             x:Name="Self"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Soundboard.Components"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="310">
+
+    <materialDesign:Card Background="#393e46" Margin="5,0,0,0" Width="250" Height="130" Padding="8">
+        <Grid HorizontalAlignment="Center" Width="230">
+            <StackPanel>
+                <TextBlock Foreground="White" FontSize="13" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Top" TextWrapping="WrapWithOverflow" Text="{Binding ElementName=Self, Path=SoundName}"></TextBlock>
+                <Slider Maximum="100" ValueChanged="SoundVolume_OnValueChanged" Margin="0,5,0,0" Value="{Binding ElementName=Self, Path=SoundVolume}" Style="{StaticResource MaterialDesignDiscreteSlider}" Minimum="0" ToolTip="Volume" TickFrequency="1" TickPlacement="None"/>
+                <CheckBox x:Name="LoopCheckBox" Foreground="White" Click="LoopCheckBox_OnClick">Loop?</CheckBox>
+            </StackPanel>
+            <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                <Button Margin="0,0,5,0" ToolTip="Play this Sound" Click="Button_PlayClick">Play</Button>
+                <Button Content="Edit" Click="EditButton_Click" ToolTip="Edit this Sound">
+                    <Button.ContextMenu>
+                        <ContextMenu Width="150" x:Name="EditContextMenu">
+                            <MenuItem Header="Edit Sound" Click="EditSound_OnClick"/>
+                            <MenuItem Header="Delete" Click="DeleteSound_Click"/>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+            </WrapPanel>
+        </Grid>
+    </materialDesign:Card>
+</UserControl>

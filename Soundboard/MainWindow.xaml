@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="450" MinWidth="800" Background="#222831" Loaded="MainWindow_OnLoaded">
+        Title="Soundboard" MinHeight="450" MinWidth="1000" Background="#222831" Loaded="MainWindow_OnLoaded" Closing="MainWindow_OnClosing">
     <Grid>
         <Grid x:Name="InitialGrid">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
