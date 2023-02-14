@@ -28,7 +28,7 @@ public class SystemHandler
             10);
 
         cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
-            TimeSpan.FromSeconds(3),
+            TimeSpan.FromSeconds(5),
             MaximumNotificationCount.FromCount(5));
 
         cfg.Dispatcher = Application.Current.Dispatcher;

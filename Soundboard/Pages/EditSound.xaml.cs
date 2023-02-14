@@ -6,6 +6,7 @@ using Microsoft.Win32;
 using NLog;
 using Soundboard.Classes;
 using Soundboard.Codes;
+using ToastNotifications.Messages;
 
 namespace Soundboard.Pages;
 
@@ -65,6 +66,7 @@ public partial class EditSound : Page
         _sound.Volume = VolumeSlider.Value;
         systemHandler.Sounds.Add(_sound);
         Log.Info("Saved sound " + _sound.Name);
+        systemHandler.Notifier.ShowSuccess("Sound saved!");
         NavigationService?.Navigate(new Sounds());
     }
 }

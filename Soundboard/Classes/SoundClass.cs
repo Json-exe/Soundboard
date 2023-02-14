@@ -79,6 +79,13 @@ public class SoundClass
         }
     }
 
+    public void StopSound()
+    {
+        if (_waveOut is not { PlaybackState: PlaybackState.Playing }) return;
+        _waveOut.Stop();
+        _reader?.Close();
+    }
+
     private void WaveOutOnPlaybackStopped(object? sender, StoppedEventArgs e)
     {
         if (Loop)

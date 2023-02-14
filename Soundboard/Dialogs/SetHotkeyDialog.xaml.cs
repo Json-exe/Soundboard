@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using NLog;
 using Soundboard.Classes;
 using Soundboard.Codes;
+using ToastNotifications.Messages;
 
 namespace Soundboard.Dialogs;
 
@@ -10,6 +12,7 @@ public partial class SetHotkeyDialog : Window
 {
     private readonly SoundClass _sound;
     private string _selectedHotkey = "";
+    private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
     public SetHotkeyDialog(SoundClass sound)
     {
@@ -31,6 +34,8 @@ public partial class SetHotkeyDialog : Window
         systemHandler.DialogBlockingGrid.Visibility = Visibility.Collapsed;
         var sound = systemHandler.Sounds.Find(x => x.Name == _sound.Name);
         if (sound != null) sound.HotKey = _selectedHotkey;
+        systemHandler.Notifier.ShowInformation("Set hotkey for " + _sound.Name + " to " + _selectedHotkey);
+        Log.Info("Set hotkey for " + _sound.Name + " to " + _selectedHotkey);
         Close();
     }
 

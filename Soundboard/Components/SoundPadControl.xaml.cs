@@ -11,6 +11,7 @@ using Soundboard.Classes;
 using Soundboard.Codes;
 using Soundboard.Dialogs;
 using Soundboard.Pages;
+using ToastNotifications.Messages;
 
 namespace Soundboard.Components;
 
@@ -81,22 +82,21 @@ public partial class SoundPadControl : UserControl
     {
         // Remove the sound from the data.json file and reload the page
         Log.Info("Deleting sound: " + SoundName);
+        var serviceProvider = (IServiceProvider)Application.Current.Resources["ServiceProvider"];
+        var systemHandler = (SystemHandler)serviceProvider.GetService(typeof(SystemHandler))!;
         // Check if the sound is already playing
-        if (_waveOut is { PlaybackState: PlaybackState.Playing })
+        var soundNow = systemHandler.Sounds.FirstOrDefault(x => x.Name == SoundName);
+        if (soundNow != null)
         {
-            _waveOut.Stop();
-            _waveOut.Dispose();
-            _reader.Dispose();
+            soundNow.StopSound();
         }
-
         var sounds = JsonConvert.DeserializeObject<List<SoundClass>>(File.ReadAllText(_dataPath + "\\data.json")) ??
                      new List<SoundClass>();
         var sound = sounds.FirstOrDefault(x => x.Name == SoundName);
         if (sound == null) return;
         sounds.Remove(sound);
         File.WriteAllText(_dataPath + "\\data.json", JsonConvert.SerializeObject(sounds));
-        var serviceProvider = (IServiceProvider)Application.Current.Resources["ServiceProvider"];
-        var systemHandler = (SystemHandler)serviceProvider.GetService(typeof(SystemHandler))!;
+        systemHandler.Notifier.ShowSuccess("Sound deleted!");
         systemHandler.Sounds.Remove(systemHandler.Sounds.FirstOrDefault(x => x.Name == SoundName)!);
         systemHandler.Navigation?.contentFrame.Navigate(new Sounds());
     }

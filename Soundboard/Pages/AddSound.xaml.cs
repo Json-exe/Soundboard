@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using NLog;
 using Soundboard.Classes;
 using Soundboard.Codes;
+using ToastNotifications.Messages;
 
 namespace Soundboard.Pages;
 
@@ -43,6 +44,7 @@ public partial class AddSound : Page
         systemHandler.Sounds.Add(sound);
         var json = JsonConvert.SerializeObject(systemHandler.Sounds, Formatting.Indented);
         File.WriteAllText(_dataPath + "\\data.json", json);
+        systemHandler.Notifier.ShowSuccess("Sound added!");
         Log.Info("Added sound " + sound.Name);
         NavigationService?.Navigate(new Sounds());
     }
