@@ -12,7 +12,7 @@ public class SoundClass
 {
     private static readonly Logger Log = LogManager.GetCurrentClassLogger();
     private readonly WaveOutEvent _waveOut = new();
-    private Mp3FileReader _reader = new("");
+    private Mp3FileReader? _reader;
 
     public string Name { get; set; } = "";
     public string PathToFile { get; set; } = "";
@@ -47,7 +47,7 @@ public class SoundClass
             if (_waveOut is { PlaybackState: PlaybackState.Playing })
             {
                 _waveOut.Stop();
-                _reader.Close();
+                _reader?.Close();
             }
 
             // Check if there are already sounds playing
@@ -83,7 +83,7 @@ public class SoundClass
     {
         if (Loop)
         {
-            _reader.Position = 0;
+            if (_reader != null) _reader.Position = 0;
             _waveOut.Play();
             return;
         }
