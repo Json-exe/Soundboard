@@ -36,6 +36,7 @@ public partial class Navigation : Page
             playingSound.Stop();
             playingSound.Dispose();
         }
+
         systemHandler.PlayingSounds.Clear();
     }
 

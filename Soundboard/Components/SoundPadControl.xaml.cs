@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using NLog;
 using Soundboard.Classes;
 using Soundboard.Codes;
+using Soundboard.Dialogs;
 
 namespace Soundboard.Components;
 
@@ -16,10 +17,12 @@ public partial class SoundPadControl : UserControl
 {
     private WaveOutEvent _waveOut;
     private Mp3FileReader _reader;
+
     private readonly string _dataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
                                         "\\JDS\\Soundboard\\Data";
+
     private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-    
+
     public SoundPadControl(SoundClass sound)
     {
         InitializeComponent();
@@ -62,7 +65,7 @@ public partial class SoundPadControl : UserControl
         init => SetValue(ThisSoundProperty, value);
     }
 
-    private void Button_PlayClick (object sender, RoutedEventArgs e)
+    private void Button_PlayClick(object sender, RoutedEventArgs e)
     {
         ThisSound.Play();
     }
@@ -84,7 +87,9 @@ public partial class SoundPadControl : UserControl
             _waveOut.Dispose();
             _reader.Dispose();
         }
-        var sounds = JsonConvert.DeserializeObject<List<SoundClass>>(File.ReadAllText(_dataPath + "\\data.json")) ?? new List<SoundClass>();
+
+        var sounds = JsonConvert.DeserializeObject<List<SoundClass>>(File.ReadAllText(_dataPath + "\\data.json")) ??
+                     new List<SoundClass>();
         var sound = sounds.FirstOrDefault(x => x.Name == SoundName);
         if (sound == null) return;
         sounds.Remove(sound);
@@ -112,11 +117,16 @@ public partial class SoundPadControl : UserControl
     {
         // Change the loop state of the sound
         ThisSound.Loop = LoopCheckBox.IsChecked == true;
-        // Save the sound
-        var sounds = JsonConvert.DeserializeObject<List<SoundClass>>(File.ReadAllText(_dataPath + "\\data.json")) ?? new List<SoundClass>();
-        var sound = sounds.FirstOrDefault(x => x.Name == SoundName);
-        if (sound == null) return;
-        sound.Loop = LoopCheckBox.IsChecked == true;
-        File.WriteAllText(_dataPath + "\\data.json", JsonConvert.SerializeObject(sounds));
+    }
+
+    private void EditHotkey_OnClick(object sender, RoutedEventArgs e)
+    {
+        var serviceProvider = (IServiceProvider)Application.Current.Resources["ServiceProvider"];
+        var systemHandler = (SystemHandler)serviceProvider.GetService(typeof(SystemHandler))!;
+        systemHandler.DialogBlockingGrid.Visibility = Visibility.Visible;
+        new SetHotkeyDialog(ThisSound)
+        {
+            Owner = Application.Current.MainWindow
+        }.ShowDialog();
     }
 }

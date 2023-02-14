@@ -8,13 +8,15 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    
+
     <materialDesign:Card Background="#393e46" Margin="5,0,0,0" Width="250" Height="130" Padding="8">
         <Grid HorizontalAlignment="Center" Width="230">
-            <TextBlock TextAlignment="Center" Foreground="White" FontWeight="Bold" VerticalAlignment="Top" Text="{Binding ElementName=Self, Path=PlaylistTitle}"/>
+            <TextBlock TextAlignment="Center" Foreground="White" FontWeight="Bold" VerticalAlignment="Top"
+                       Text="{Binding ElementName=Self, Path=PlaylistTitle}" />
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Label FontWeight="Bold">Sounds:</Label>
-                <TextBlock TextAlignment="Center" Foreground="White" Text="{Binding ElementName=Self, Path=PlaylistCount}"/>
+                <TextBlock TextAlignment="Center" Foreground="White"
+                           Text="{Binding ElementName=Self, Path=PlaylistCount}" />
             </StackPanel>
             <Button VerticalAlignment="Bottom" Click="OpenPlaylist_OnClick">Open</Button>
         </Grid>

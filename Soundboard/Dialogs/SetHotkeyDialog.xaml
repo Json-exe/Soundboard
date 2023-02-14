@@ -1,0 +1,31 @@
+﻿<Window x:Class="Soundboard.Dialogs.SetHotkeyDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Soundboard.Dialogs"
+        mc:Ignorable="d"
+        d:DesignHeight="450" d:DesignWidth="800"
+        Title="SetHotkeyDialog" SizeToContent="WidthAndHeight" WindowStyle="None" WindowStartupLocation="CenterOwner"
+        Background="Transparent" AllowsTransparency="True">
+
+    <Border CornerRadius="15,15,15,15" Background="#393e46" Padding="8">
+        <Grid>
+            <StackPanel>
+                <Label FontWeight="Bold" FontSize="20" HorizontalAlignment="Center">Set Hotkey</Label>
+                <Label FontSize="15" HorizontalAlignment="Center">Press any Key to set it as a Hotkey for the sound!</Label>
+                <Label x:Name="CurrentHotkey" FontSize="15" HorizontalAlignment="Center">Current Hotkey: $Hotkey</Label>
+                <TextBox x:Name="ShortcutTextBox" PreviewKeyDown="ShortcutTextBox_OnKeyDown"
+                         ToolTip="Click here and then Press a Key to set as Hotkey!"
+                         materialDesign:HintAssist.Hint="Click here and then press a key to set as hotkey!"
+                         IsReadOnly="True"
+                         Foreground="White" />
+                <WrapPanel HorizontalAlignment="Center" Margin="0,10,0,0">
+                    <Button Click="SaveHotkey_OnClick">Save</Button>
+                    <Button Margin="5,0,0,0" Click="Exit_OnClick">Exit</Button>
+                </WrapPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

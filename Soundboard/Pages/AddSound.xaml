@@ -8,17 +8,19 @@
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddSound" Background="#222831">
-    
+
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label FontWeight="Bold" HorizontalAlignment="Center" FontSize="18">Add a Sound</Label>
             <TextBox x:Name="NameBox" materialDesign:HintAssist.Hint="Sound-Name" Foreground="White" Margin="0,10,0,0" />
             <WrapPanel>
-                <TextBox x:Name="PathBox" materialDesign:HintAssist.Hint="Path" Width="300" IsReadOnly="True" Foreground="White" Margin="0,10,0,0" />
+                <TextBox x:Name="PathBox" materialDesign:HintAssist.Hint="Path" Width="300" IsReadOnly="True"
+                         Foreground="White" Margin="0,10,0,0" />
                 <Button x:Name="BrowseButton" Content="Browse" Margin="10,10,0,0" Click="BrowseButton_OnClick" />
             </WrapPanel>
-            <TextBox x:Name="PlaylistBox" materialDesign:HintAssist.Hint="Playlist-Name" ToolTip="Enter a Name for a Playlist" Foreground="White" Margin="0,10,0,0" />
-            <Button x:Name="AddButton" Content="Add" Margin="0,10,0,0" Click="AddButton_OnClick"/>
+            <TextBox x:Name="PlaylistBox" materialDesign:HintAssist.Hint="Playlist-Name"
+                     ToolTip="Enter a Name for a Playlist" Foreground="White" Margin="0,10,0,0" />
+            <Button x:Name="AddButton" Content="Add" Margin="0,10,0,0" Click="AddButton_OnClick" />
         </StackPanel>
     </Grid>
 </Page>

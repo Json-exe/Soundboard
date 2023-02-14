@@ -4,15 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Soundboard" MinHeight="450" MinWidth="1000" Background="#222831" Loaded="MainWindow_OnLoaded" Closing="MainWindow_OnClosing">
+        Title="Soundboard" MinHeight="450" MinWidth="1000" Background="#222831" Loaded="MainWindow_OnLoaded"
+        Closing="MainWindow_OnClosing">
+
     <Grid>
-        <Grid x:Name="InitialGrid">
+        <Grid>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}" IsIndeterminate="True"
                              Height="125" Width="125" />
                 <Label FontSize="15" FontWeight="Bold" HorizontalContentAlignment="Center" Margin="0,8,0,0">Initializing...</Label>
             </StackPanel>
         </Grid>
-        <Frame x:Name="mainFrame" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
+        <Grid Opacity="0.6" Background="Black" Visibility="Collapsed" x:Name="DialogBlockingGrid" />
     </Grid>
 </Window>

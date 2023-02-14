@@ -12,8 +12,14 @@
     <materialDesign:Card Background="#393e46" Margin="5,0,0,0" Width="250" Height="130" Padding="8">
         <Grid HorizontalAlignment="Center" Width="230">
             <StackPanel>
-                <TextBlock Foreground="White" FontSize="13" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Top" TextWrapping="WrapWithOverflow" Text="{Binding ElementName=Self, Path=SoundName}"></TextBlock>
-                <Slider Maximum="100" ValueChanged="SoundVolume_OnValueChanged" Margin="0,5,0,0" Value="{Binding ElementName=Self, Path=SoundVolume}" Style="{StaticResource MaterialDesignDiscreteSlider}" Minimum="0" ToolTip="Volume" TickFrequency="1" TickPlacement="None"/>
+                <TextBlock Foreground="White" FontSize="13" FontWeight="Bold" TextAlignment="Center"
+                           VerticalAlignment="Top" TextWrapping="WrapWithOverflow"
+                           Text="{Binding ElementName=Self, Path=SoundName}">
+                </TextBlock>
+                <Slider Maximum="100" ValueChanged="SoundVolume_OnValueChanged" Margin="0,5,0,0"
+                        Value="{Binding ElementName=Self, Path=SoundVolume}"
+                        Style="{StaticResource MaterialDesignDiscreteSlider}" Minimum="0" ToolTip="Volume"
+                        TickFrequency="1" TickPlacement="None" />
                 <CheckBox x:Name="LoopCheckBox" Foreground="White" Click="LoopCheckBox_OnClick">Loop?</CheckBox>
             </StackPanel>
             <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Center">
@@ -21,8 +27,9 @@
                 <Button Content="Edit" Click="EditButton_Click" ToolTip="Edit this Sound">
                     <Button.ContextMenu>
                         <ContextMenu Width="150" x:Name="EditContextMenu">
-                            <MenuItem Header="Edit Sound" Click="EditSound_OnClick"/>
-                            <MenuItem Header="Delete" Click="DeleteSound_Click"/>
+                            <MenuItem Header="Edit Sound" Click="EditSound_OnClick" />
+                            <MenuItem Header="Edit Hotkey" Click="EditHotkey_OnClick" />
+                            <MenuItem Header="Delete" Click="DeleteSound_Click" />
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>

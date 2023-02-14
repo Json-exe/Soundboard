@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d"
-      d:DesignHeight="400" 
+      d:DesignHeight="400"
       d:DesignWidth="800"
       Title="MainPage" Height="auto" Width="auto" Background="#222831">
 
@@ -68,6 +68,6 @@
                 </WrapPanel>
             </materialDesign:Card>
         </Grid>
-        <Frame x:Name="contentFrame" NavigationUIVisibility="Hidden" Margin="0,65,0,0" Background="#222831"/>
+        <Frame x:Name="contentFrame" NavigationUIVisibility="Hidden" Margin="0,65,0,0" Background="#222831" />
     </Grid>
 </Page>

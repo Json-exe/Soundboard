@@ -8,7 +8,7 @@ namespace Soundboard.Components;
 public partial class PlaylistControl : UserControl
 {
     private string PlaylistDelimeter { get; set; }
-    
+
     public PlaylistControl(string playlistDelimeter)
     {
         InitializeComponent();

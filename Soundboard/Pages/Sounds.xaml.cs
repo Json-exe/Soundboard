@@ -12,7 +12,7 @@ public partial class Sounds : Page
     public Sounds()
     {
         InitializeComponent();
-        var serviceProvider = (IServiceProvider) Application.Current.Resources["ServiceProvider"];
+        var serviceProvider = (IServiceProvider)Application.Current.Resources["ServiceProvider"];
         var systemHandler = (SystemHandler)serviceProvider.GetService(typeof(SystemHandler))!;
         foreach (var sound in systemHandler.Sounds)
         {
@@ -38,11 +38,11 @@ public partial class Sounds : Page
             }
         }
     }
-    
+
     public Sounds(string PlaylistDelimeter)
     {
         InitializeComponent();
-        var serviceProvider = (IServiceProvider) Application.Current.Resources["ServiceProvider"];
+        var serviceProvider = (IServiceProvider)Application.Current.Resources["ServiceProvider"];
         var systemHandler = (SystemHandler)serviceProvider.GetService(typeof(SystemHandler))!;
         foreach (var sound in systemHandler.Sounds.Where(x => x.Playlist == PlaylistDelimeter))
         {

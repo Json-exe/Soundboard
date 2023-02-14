@@ -10,11 +10,11 @@ namespace Soundboard.Pages;
 public partial class Settings : Page
 {
     private readonly SystemHandler _systemHandler;
-    
+
     public Settings()
     {
         InitializeComponent();
-        var serviceProvider = (IServiceProvider) Application.Current.Resources["ServiceProvider"];
+        var serviceProvider = (IServiceProvider)Application.Current.Resources["ServiceProvider"];
         _systemHandler = (SystemHandler)serviceProvider.GetService(typeof(SystemHandler))!;
     }
 
@@ -48,7 +48,7 @@ public partial class Settings : Page
     }
 
     private void StandardVolumeSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-    { 
+    {
         Properties.Settings.Default.StandardVolume = StandardVolumeSlider.Value;
         Properties.Settings.Default.Save();
     }

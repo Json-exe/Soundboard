@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Controls;
 using NAudio.CoreAudioApi;
 using Soundboard.Classes;
 using NAudio.Wave;
@@ -13,6 +14,7 @@ public class SystemHandler
     public MMDevice? SelectedAudioDevice;
     public Navigation? Navigation;
     public readonly GlobalHotkey GlobalHotkey;
+    public Grid DialogBlockingGrid;
 
     public SystemHandler()
     {

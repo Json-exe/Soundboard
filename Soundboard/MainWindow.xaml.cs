@@ -27,11 +27,12 @@ public partial class MainWindow : Window
     {
         // Build the service provider
         var services = new ServiceCollection();
-        services.AddSingleton<SystemHandler>();
+        services.AddSingleton(typeof(SystemHandler));
         var serviceProvider = services.BuildServiceProvider();
         // Store the service provider in the application's resources
         Application.Current.Resources["ServiceProvider"] = serviceProvider;
         var systemHandler = serviceProvider.GetService<SystemHandler>()!;
+        systemHandler.DialogBlockingGrid = DialogBlockingGrid;
 
         // Here comes initial startup code
         Log.Info("Application started");
@@ -51,7 +52,8 @@ public partial class MainWindow : Window
         if (File.Exists(dataPath + "\\data.json"))
         {
             Log.Debug("Data file exists");
-            var sounds = JsonConvert.DeserializeObject<List<SoundClass>>(File.ReadAllText(dataPath + "\\data.json")) ?? new List<SoundClass>();
+            var sounds = JsonConvert.DeserializeObject<List<SoundClass>>(File.ReadAllText(dataPath + "\\data.json")) ??
+                         new List<SoundClass>();
             systemHandler.Sounds = sounds;
         }
         else
@@ -71,6 +73,7 @@ public partial class MainWindow : Window
                 systemHandler.SelectedAudioDevice = device;
                 break;
             }
+
             // If the selected audio device is not found clear the ID from the settings file
             if (systemHandler.SelectedAudioDevice == null)
             {
@@ -79,7 +82,7 @@ public partial class MainWindow : Window
             }
         }
 
-        mainFrame.NavigationService.Navigate(new Navigation());
+        MainFrame.NavigationService.Navigate(new Navigation());
     }
 
     private void MainWindow_OnClosing(object? sender, CancelEventArgs e)

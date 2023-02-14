@@ -12,9 +12,10 @@ namespace Soundboard.Pages;
 public partial class AddSound : Page
 {
     private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
     private readonly string _dataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
-                                 "\\JDS\\Soundboard\\Data";
-    
+                                        "\\JDS\\Soundboard\\Data";
+
     public AddSound()
     {
         InitializeComponent();
@@ -27,6 +28,7 @@ public partial class AddSound : Page
             MessageBox.Show("Please fill in all fields!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
+
         var sound = new SoundClass
         {
             Name = NameBox.Text,
@@ -35,7 +37,7 @@ public partial class AddSound : Page
             Playlist = PlaylistBox.Text,
             Loop = false
         };
-        var serviceProvider = (IServiceProvider) Application.Current.Resources["ServiceProvider"];
+        var serviceProvider = (IServiceProvider)Application.Current.Resources["ServiceProvider"];
         var systemHandler = (SystemHandler)serviceProvider.GetService(typeof(SystemHandler))!;
         systemHandler.Sounds.Add(sound);
         var json = JsonConvert.SerializeObject(systemHandler.Sounds, Formatting.Indented);
@@ -45,7 +47,7 @@ public partial class AddSound : Page
     }
 
     private void BrowseButton_OnClick(object sender, RoutedEventArgs e)
-    { 
+    {
         // Open a file dialog to select a mp3 file
         // Set the file path to the file path text box
         var dialog = new Microsoft.Win32.OpenFileDialog

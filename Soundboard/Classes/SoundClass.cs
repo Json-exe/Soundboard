@@ -14,15 +14,16 @@ public class SoundClass
     private WaveOutEvent _waveOut;
     private Mp3FileReader _reader;
     private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
     private readonly string _dataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
                                         "\\JDS\\Soundboard\\Data";
-    
+
     public string Name { get; set; }
-    public string PathToFile { get; set; } 
+    public string PathToFile { get; set; }
     public double Volume { get; set; } = 100;
     public string Playlist { get; set; } = "";
     public bool Loop { get; set; }
-    public Key ShortcutKey { get; set; } = Key.None;
+    public string HotKey { get; set; } = "";
 
     public void SetVolume(double newVolume)
     {
@@ -31,6 +32,7 @@ public class SoundClass
         {
             _waveOut.Volume = (float)Volume / 100;
         }
+
         Volume = newVolume;
     }
 
@@ -44,6 +46,7 @@ public class SoundClass
             MessageBox.Show("Please select an audio device!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
+
         // Check if the sound file exists
         if (File.Exists(PathToFile))
         {
@@ -51,9 +54,9 @@ public class SoundClass
             if (_waveOut is { PlaybackState: PlaybackState.Playing })
             {
                 _waveOut.Stop();
-                _waveOut.Dispose();
-                _reader.Dispose();
+                _reader.Close();
             }
+
             // Check if there are already sounds playing
             if (systemHandler.PlayingSounds.Count > 0)
             {
@@ -63,9 +66,11 @@ public class SoundClass
                     playingSound.Stop();
                     playingSound.Dispose();
                 }
+
                 // Clear the list
                 systemHandler.PlayingSounds.Clear();
             }
+
             _reader = new Mp3FileReader(PathToFile);
             _waveOut = new WaveOutEvent();
             _waveOut.DeviceNumber = GetDeviceNumber(systemHandler.SelectedAudioDevice);
@@ -81,7 +86,7 @@ public class SoundClass
             MessageBox.Show("The sound file does not exist!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
-    
+
     private void WaveOutOnPlaybackStopped(object? sender, StoppedEventArgs e)
     {
         if (Loop)
@@ -90,12 +95,13 @@ public class SoundClass
             _waveOut.Play();
             return;
         }
+
         // Remove the sound from the list of playing sounds
         var serviceProvider = (IServiceProvider)Application.Current.Resources["ServiceProvider"];
         var systemHandler = (SystemHandler)serviceProvider.GetService(typeof(SystemHandler))!;
         systemHandler.PlayingSounds.Remove(_waveOut);
-        _waveOut.Dispose();
-        _reader.Dispose();
+        if (_waveOut is not { PlaybackState: PlaybackState.Playing }) return;
+        _waveOut.Stop();
     }
 
     private static int GetDeviceNumber(MMDevice device)
@@ -110,6 +116,7 @@ public class SoundClass
             deviceNumber = i;
             break;
         }
+
         return deviceNumber;
     }
 }
