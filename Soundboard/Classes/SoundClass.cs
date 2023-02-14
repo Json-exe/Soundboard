@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
-using System.Windows.Input;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
 using NLog;
@@ -11,15 +10,12 @@ namespace Soundboard.Classes;
 
 public class SoundClass
 {
-    private WaveOutEvent _waveOut;
-    private Mp3FileReader _reader;
     private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+    private readonly WaveOutEvent _waveOut = new();
+    private Mp3FileReader _reader = new("");
 
-    private readonly string _dataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
-                                        "\\JDS\\Soundboard\\Data";
-
-    public string Name { get; set; }
-    public string PathToFile { get; set; }
+    public string Name { get; set; } = "";
+    public string PathToFile { get; set; } = "";
     public double Volume { get; set; } = 100;
     public string Playlist { get; set; } = "";
     public bool Loop { get; set; }
@@ -28,10 +24,7 @@ public class SoundClass
     public void SetVolume(double newVolume)
     {
         // Change the volume of the sound
-        if (_waveOut is { PlaybackState: PlaybackState.Playing })
-        {
-            _waveOut.Volume = (float)Volume / 100;
-        }
+        if (_waveOut is { PlaybackState: PlaybackState.Playing }) _waveOut.Volume = (float)Volume / 100;
 
         Volume = newVolume;
     }
@@ -72,7 +65,6 @@ public class SoundClass
             }
 
             _reader = new Mp3FileReader(PathToFile);
-            _waveOut = new WaveOutEvent();
             _waveOut.DeviceNumber = GetDeviceNumber(systemHandler.SelectedAudioDevice);
             _waveOut.Volume = (float)Volume / 100;
             _waveOut.Init(_reader);

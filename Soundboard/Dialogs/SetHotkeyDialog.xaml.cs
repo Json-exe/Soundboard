@@ -25,10 +25,10 @@ public partial class SetHotkeyDialog : Window
             MessageBox.Show("Please select a hotkey!", "Warning!", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
+
         var serviceProvider = (IServiceProvider)Application.Current.Resources["ServiceProvider"];
         var systemHandler = (SystemHandler)serviceProvider.GetService(typeof(SystemHandler))!;
         systemHandler.DialogBlockingGrid.Visibility = Visibility.Collapsed;
-        // Save the hotkey to the sound inside the system handler
         var sound = systemHandler.Sounds.Find(x => x.Name == _sound.Name);
         if (sound != null) sound.HotKey = _selectedHotkey;
         Close();
@@ -37,15 +37,9 @@ public partial class SetHotkeyDialog : Window
     private void ShortcutTextBox_OnKeyDown(object sender, KeyEventArgs e)
     {
         var hotkey = "";
-        if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
-        {
-            hotkey += "Ctrl + ";
-        }
+        if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control)) hotkey += "Ctrl + ";
 
-        if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
-        {
-            hotkey += "Shift + ";
-        }
+        if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift)) hotkey += "Shift + ";
 
         hotkey += e.Key.ToString();
 

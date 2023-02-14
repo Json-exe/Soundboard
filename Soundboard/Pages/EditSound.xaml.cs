@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 using NLog;
 using Soundboard.Classes;
 using Soundboard.Codes;
@@ -9,11 +11,12 @@ namespace Soundboard.Pages;
 
 public partial class EditSound : Page
 {
+    private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
     private readonly string _dataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
                                         "\\JDS\\Soundboard\\Data";
 
-    private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-    private SoundClass _sound;
+    private readonly SoundClass _sound;
 
     public EditSound(SoundClass sound)
     {
@@ -29,7 +32,7 @@ public partial class EditSound : Page
     {
         // Open a file dialog to select a mp3 file
         // Set the file path to the file path text box
-        var dialog = new Microsoft.Win32.OpenFileDialog
+        var dialog = new OpenFileDialog
         {
             Filter = "MP3 Files (*.mp3)|*.mp3",
             InitialDirectory = "C:\\",
@@ -38,16 +41,12 @@ public partial class EditSound : Page
         var result = dialog.ShowDialog();
         if (result != true) return;
         // Check if the file exists
-        if (System.IO.File.Exists(dialog.FileName))
-        {
+        if (File.Exists(dialog.FileName))
             // Set the file path to the file path text box
             PathBox.Text = dialog.FileName;
-        }
         else
-        {
             // Show an error message
             MessageBox.Show("The file does not exist!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
     }
 
     private void SaveButton_OnClick(object sender, RoutedEventArgs e)

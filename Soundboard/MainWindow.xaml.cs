@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Windows;
-using System.Windows.Documents;
 using Microsoft.Extensions.DependencyInjection;
 using NAudio.CoreAudioApi;
 using Newtonsoft.Json;
@@ -11,6 +10,7 @@ using NLog;
 using Soundboard.Classes;
 using Soundboard.Codes;
 using Soundboard.Components;
+using Soundboard.Properties;
 
 namespace Soundboard;
 
@@ -63,13 +63,13 @@ public partial class MainWindow : Window
             Log.Debug("Data file created");
         }
 
-        if (!string.IsNullOrEmpty(Properties.Settings.Default.StandardAudioDeviceID))
+        if (!string.IsNullOrEmpty(Settings.Default.StandardAudioDeviceID))
         {
             // Enumerate the audio devices and add them to the combo box
             var deviceEnumerator = new MMDeviceEnumerator();
             foreach (var device in deviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active))
             {
-                if (device.ID != Properties.Settings.Default.StandardAudioDeviceID) continue;
+                if (device.ID != Settings.Default.StandardAudioDeviceID) continue;
                 systemHandler.SelectedAudioDevice = device;
                 break;
             }
@@ -77,8 +77,8 @@ public partial class MainWindow : Window
             // If the selected audio device is not found clear the ID from the settings file
             if (systemHandler.SelectedAudioDevice == null)
             {
-                Properties.Settings.Default.StandardAudioDeviceID = string.Empty;
-                Properties.Settings.Default.Save();
+                Settings.Default.StandardAudioDeviceID = string.Empty;
+                Settings.Default.Save();
             }
         }
 
@@ -92,6 +92,7 @@ public partial class MainWindow : Window
         var serviceProvider = (IServiceProvider)Application.Current.Resources["ServiceProvider"];
         var systemHandler = (SystemHandler)serviceProvider.GetService(typeof(SystemHandler))!;
         systemHandler.GlobalHotkey.Dispose();
+        systemHandler.Notifier.Dispose();
         var dataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
                        "\\JDS\\Soundboard\\Data";
         var sounds = systemHandler.Sounds;

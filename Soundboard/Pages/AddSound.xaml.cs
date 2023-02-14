@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using NLog;
 using Soundboard.Classes;
@@ -50,7 +51,7 @@ public partial class AddSound : Page
     {
         // Open a file dialog to select a mp3 file
         // Set the file path to the file path text box
-        var dialog = new Microsoft.Win32.OpenFileDialog
+        var dialog = new OpenFileDialog
         {
             Filter = "MP3 Files (*.mp3)|*.mp3",
             InitialDirectory = "C:\\",
@@ -59,15 +60,11 @@ public partial class AddSound : Page
         var result = dialog.ShowDialog();
         if (result != true) return;
         // Check if the file exists
-        if (System.IO.File.Exists(dialog.FileName))
-        {
+        if (File.Exists(dialog.FileName))
             // Set the file path to the file path text box
             PathBox.Text = dialog.FileName;
-        }
         else
-        {
             // Show an error message
             MessageBox.Show("The file does not exist!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
     }
 }

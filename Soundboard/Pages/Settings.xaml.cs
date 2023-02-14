@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using NAudio.CoreAudioApi;
@@ -23,9 +22,7 @@ public partial class Settings : Page
         // Enumerate the audio devices and add them to the combo box
         var deviceEnumerator = new MMDeviceEnumerator();
         foreach (var device in deviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active))
-        {
             AudioDevices.Items.Add(device);
-        }
 
         if (_systemHandler.SelectedAudioDevice == null) return;
         {

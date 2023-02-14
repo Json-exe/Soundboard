@@ -10,18 +10,31 @@ using NLog;
 using Soundboard.Classes;
 using Soundboard.Codes;
 using Soundboard.Dialogs;
+using Soundboard.Pages;
 
 namespace Soundboard.Components;
 
 public partial class SoundPadControl : UserControl
 {
-    private WaveOutEvent _waveOut;
-    private Mp3FileReader _reader;
+    private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
+    public static readonly DependencyProperty SoundNameProperty = DependencyProperty.Register(
+        nameof(SoundName), typeof(string), typeof(SoundPadControl), new PropertyMetadata(default(string)));
+
+    public static readonly DependencyProperty SoundFilePathProperty = DependencyProperty.Register(
+        nameof(SoundFilePath), typeof(string), typeof(SoundPadControl), new PropertyMetadata(default(string)));
+
+    public static readonly DependencyProperty SoundVolumeProperty = DependencyProperty.Register(
+        nameof(SoundVolume), typeof(double), typeof(SoundPadControl), new PropertyMetadata(default(double)));
+
+    public static readonly DependencyProperty ThisSoundProperty = DependencyProperty.Register(
+        nameof(ThisSound), typeof(SoundClass), typeof(SoundPadControl), new PropertyMetadata(default(SoundClass)));
 
     private readonly string _dataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) +
                                         "\\JDS\\Soundboard\\Data";
 
-    private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+    private Mp3FileReader _reader;
+    private WaveOutEvent _waveOut;
 
     public SoundPadControl(SoundClass sound)
     {
@@ -29,17 +42,11 @@ public partial class SoundPadControl : UserControl
         LoopCheckBox.IsChecked = sound.Loop;
     }
 
-    public static readonly DependencyProperty SoundNameProperty = DependencyProperty.Register(
-        nameof(SoundName), typeof(string), typeof(SoundPadControl), new PropertyMetadata(default(string)));
-
     public string SoundName
     {
         get => (string)GetValue(SoundNameProperty);
         init => SetValue(SoundNameProperty, value);
     }
-
-    public static readonly DependencyProperty SoundFilePathProperty = DependencyProperty.Register(
-        nameof(SoundFilePath), typeof(string), typeof(SoundPadControl), new PropertyMetadata(default(string)));
 
     public string SoundFilePath
     {
@@ -47,17 +54,11 @@ public partial class SoundPadControl : UserControl
         init => SetValue(SoundFilePathProperty, value);
     }
 
-    public static readonly DependencyProperty SoundVolumeProperty = DependencyProperty.Register(
-        nameof(SoundVolume), typeof(double), typeof(SoundPadControl), new PropertyMetadata(default(double)));
-
     public double SoundVolume
     {
         get => (double)GetValue(SoundVolumeProperty);
         set => SetValue(SoundVolumeProperty, value);
     }
-
-    public static readonly DependencyProperty ThisSoundProperty = DependencyProperty.Register(
-        nameof(ThisSound), typeof(SoundClass), typeof(SoundPadControl), new PropertyMetadata(default(SoundClass)));
 
     public SoundClass ThisSound
     {
@@ -97,7 +98,7 @@ public partial class SoundPadControl : UserControl
         var serviceProvider = (IServiceProvider)Application.Current.Resources["ServiceProvider"];
         var systemHandler = (SystemHandler)serviceProvider.GetService(typeof(SystemHandler))!;
         systemHandler.Sounds.Remove(systemHandler.Sounds.FirstOrDefault(x => x.Name == SoundName)!);
-        systemHandler.Navigation?.contentFrame.Navigate(new Pages.Sounds());
+        systemHandler.Navigation?.contentFrame.Navigate(new Sounds());
     }
 
     private void SoundVolume_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -110,7 +111,7 @@ public partial class SoundPadControl : UserControl
         // Open the edit sound page
         var serviceProvider = (IServiceProvider)Application.Current.Resources["ServiceProvider"];
         var systemHandler = (SystemHandler)serviceProvider.GetService(typeof(SystemHandler))!;
-        systemHandler.Navigation?.contentFrame.Navigate(new Pages.EditSound(ThisSound));
+        systemHandler.Navigation?.contentFrame.Navigate(new EditSound(ThisSound));
     }
 
     private void LoopCheckBox_OnClick(object sender, RoutedEventArgs e)

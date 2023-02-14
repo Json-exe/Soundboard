@@ -15,7 +15,6 @@ public partial class Sounds : Page
         var serviceProvider = (IServiceProvider)Application.Current.Resources["ServiceProvider"];
         var systemHandler = (SystemHandler)serviceProvider.GetService(typeof(SystemHandler))!;
         foreach (var sound in systemHandler.Sounds)
-        {
             if (!string.IsNullOrEmpty(sound.Playlist))
             {
                 var playlistControl = new PlaylistControl(sound.Playlist)
@@ -32,11 +31,10 @@ public partial class Sounds : Page
                     ThisSound = sound,
                     SoundName = sound.Name,
                     SoundFilePath = sound.PathToFile,
-                    SoundVolume = sound.Volume,
+                    SoundVolume = sound.Volume
                 };
                 SoundPad.Children.Add(soundPadControl);
             }
-        }
     }
 
     public Sounds(string PlaylistDelimeter)
@@ -51,7 +49,7 @@ public partial class Sounds : Page
                 ThisSound = sound,
                 SoundName = sound.Name,
                 SoundFilePath = sound.PathToFile,
-                SoundVolume = sound.Volume,
+                SoundVolume = sound.Volume
             };
             SoundPad.Children.Add(soundPadControl);
         }

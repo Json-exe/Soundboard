@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -10,6 +8,9 @@ namespace Soundboard.Classes;
 
 public class GlobalHotkey
 {
+    private const int WH_KEYBOARD_LL = 13;
+    private const int WM_KEYDOWN = 0x0100;
+    private const int WM_SYSKEYDOWN = 0x0104;
     private readonly nint _hookHandle;
     private readonly HookProc _hookProc;
     private readonly SystemHandler _systemHandler;
@@ -20,12 +21,6 @@ public class GlobalHotkey
         _hookProc = HookCallback;
         _hookHandle = SetWindowsHookEx(WH_KEYBOARD_LL, _hookProc, GetModuleHandle(nint.Zero), 0);
     }
-
-    private delegate nint HookProc(int nCode, nint wParam, nint lParam);
-
-    private const int WH_KEYBOARD_LL = 13;
-    private const int WM_KEYDOWN = 0x0100;
-    private const int WM_SYSKEYDOWN = 0x0104;
 
     private nint HookCallback(int nCode, nint wParam, nint lParam)
     {
@@ -53,7 +48,6 @@ public class GlobalHotkey
                 // If the last key is the key that was pressed, check if the other keys are pressed
                 var otherKeysPressed = true;
                 foreach (var hotKey in hotKeyList)
-                {
                     if (hotKey == "Ctrl")
                     {
                         if (!Keyboard.IsKeyDown(Key.LeftCtrl) && !Keyboard.IsKeyDown(Key.RightCtrl))
@@ -89,22 +83,15 @@ public class GlobalHotkey
                             break;
                         }
                     }
-                }
 
                 // If all keys are pressed, play the sound
-                if (otherKeysPressed)
-                {
-                    sound.Play();
-                }
+                if (otherKeysPressed) sound.Play();
             }
             else
             {
                 // If the hotkey does not contain a +, it's a single key
                 var hotKey = (Keys)(hotKeyConverter.ConvertFromString(sound.HotKey) ?? Keys.None);
-                if ((int)hotKey == vkCode)
-                {
-                    sound.Play();
-                }
+                if ((int)hotKey == vkCode) sound.Play();
             }
 
             // var hotKey = (Keys)(hotKeyConverter.ConvertFromString(sound.HotKey) ?? Keys.None);
@@ -134,4 +121,6 @@ public class GlobalHotkey
     {
         UnhookWindowsHookEx(_hookHandle);
     }
+
+    private delegate nint HookProc(int nCode, nint wParam, nint lParam);
 }

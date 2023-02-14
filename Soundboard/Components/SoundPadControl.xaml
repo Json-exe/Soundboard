@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              x:Name="Self"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:Soundboard.Components"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="310">
 
@@ -14,8 +13,7 @@
             <StackPanel>
                 <TextBlock Foreground="White" FontSize="13" FontWeight="Bold" TextAlignment="Center"
                            VerticalAlignment="Top" TextWrapping="WrapWithOverflow"
-                           Text="{Binding ElementName=Self, Path=SoundName}">
-                </TextBlock>
+                           Text="{Binding ElementName=Self, Path=SoundName}" />
                 <Slider Maximum="100" ValueChanged="SoundVolume_OnValueChanged" Margin="0,5,0,0"
                         Value="{Binding ElementName=Self, Path=SoundVolume}"
                         Style="{StaticResource MaterialDesignDiscreteSlider}" Minimum="0" ToolTip="Volume"
