@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="310">
 
-    <materialDesign:Card Background="#393e46" Margin="5,0,0,0" Width="250" Height="130" Padding="8">
+    <materialDesign:Card Background="#393e46" Margin="5,5,0,0" Width="250" Height="130" Padding="8">
         <Grid HorizontalAlignment="Center" Width="230">
             <StackPanel>
                 <TextBlock Foreground="White" FontSize="13" FontWeight="Bold" TextAlignment="Center"
