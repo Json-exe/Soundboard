@@ -15,6 +15,7 @@ public partial class Settings : Page
         InitializeComponent();
         var serviceProvider = (IServiceProvider)Application.Current.Resources["ServiceProvider"];
         _systemHandler = (SystemHandler)serviceProvider.GetService(typeof(SystemHandler))!;
+        ActivateHotkeys.IsChecked = Properties.Settings.Default.ActivateHotkeys;
     }
 
     private void Settings_OnLoaded(object sender, RoutedEventArgs e)
@@ -47,6 +48,12 @@ public partial class Settings : Page
     private void StandardVolumeSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
     {
         Properties.Settings.Default.StandardVolume = StandardVolumeSlider.Value;
+        Properties.Settings.Default.Save();
+    }
+
+    private void ActivateHotkeys_OnClick(object sender, RoutedEventArgs e)
+    {
+        Properties.Settings.Default.ActivateHotkeys = !Properties.Settings.Default.ActivateHotkeys;
         Properties.Settings.Default.Save();
     }
 }

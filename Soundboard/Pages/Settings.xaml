@@ -19,6 +19,16 @@
             <Slider x:Name="StandardVolumeSlider" Maximum="100" ValueChanged="StandardVolumeSlider_OnValueChanged"
                     Margin="0,5,0,0" Style="{StaticResource MaterialDesignDiscreteSlider}" Minimum="0" ToolTip="Volume"
                     TickFrequency="1" TickPlacement="None" />
+            <Label HorizontalAlignment="Center" Margin="0,15,0,0" FontSize="15">Hotkeys</Label>
+            <CheckBox x:Name="ActivateHotkeys" Click="ActivateHotkeys_OnClick" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,5,0,0" Foreground="White">Activate Hotkeys</CheckBox>
+            <materialDesign:Chip Background="#00b2b3" HorizontalAlignment="Center">
+                <materialDesign:Chip.Icon>
+                    <materialDesign:PackIcon Kind="Information"/>
+                </materialDesign:Chip.Icon>
+                <TextBlock HorizontalAlignment="Center" Margin="0,5,0,0" Foreground="Black">
+                    If there are any problems with the hotkeys, please restart the application and start it as administrator.
+                </TextBlock>
+            </materialDesign:Chip>
         </StackPanel>
     </Grid>
 </Page>

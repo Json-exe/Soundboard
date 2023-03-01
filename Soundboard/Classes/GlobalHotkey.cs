@@ -24,7 +24,7 @@ public class GlobalHotkey
 
     private nint HookCallback(int nCode, nint wParam, nint lParam)
     {
-        if (nCode < 0 || wParam is not (WM_KEYDOWN or WM_SYSKEYDOWN))
+        if (Properties.Settings.Default.ActivateHotkeys && (nCode < 0 || wParam is not (WM_KEYDOWN or WM_SYSKEYDOWN)))
             return CallNextHookEx(_hookHandle, nCode, wParam, lParam);
         var vkCode = Marshal.ReadInt32(lParam);
         var hotKeyConverter = new KeysConverter();

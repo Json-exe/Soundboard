@@ -12,14 +12,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MaterialDesignThemes" Version="4.8.0-ci161"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0"/>
-        <PackageReference Include="NAudio" Version="2.1.0"/>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.2"/>
-        <PackageReference Include="NLog" Version="5.1.1"/>
-        <PackageReference Include="NLog.Schema" Version="5.1.1"/>
-        <PackageReference Include="ToastNotifications" Version="2.5.1"/>
-        <PackageReference Include="ToastNotifications.Messages" Version="2.5.1"/>
+        <PackageReference Include="MaterialDesignThemes" Version="4.8.0-ci161" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+        <PackageReference Include="NAudio" Version="2.1.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+        <PackageReference Include="NLog" Version="5.1.2" />
+        <PackageReference Include="NLog.Schema" Version="5.1.2" />
+        <PackageReference Include="ToastNotifications" Version="2.5.1" />
+        <PackageReference Include="ToastNotifications.Messages" Version="2.5.1" />
     </ItemGroup>
 
     <ItemGroup>

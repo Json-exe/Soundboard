@@ -45,5 +45,17 @@ namespace Soundboard.Properties {
                 this["StandardVolume"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ActivateHotkeys {
+            get {
+                return ((bool)(this["ActivateHotkeys"]));
+            }
+            set {
+                this["ActivateHotkeys"] = value;
+            }
+        }
     }
 }
